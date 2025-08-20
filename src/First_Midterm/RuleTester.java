@@ -5,20 +5,20 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-class Student {
+class Studen {
     String id;
     List<Integer> grades;
 
-    public Student(String id, List<Integer> grades) {
+    public Studen(String id, List<Integer> grades) {
         this.id = id;
         this.grades = grades;
     }
 
-    public static Student create(String line) {
+    public static Studen create(String line) {
         String[] parts = line.split("\\s+");
         String id = parts[0];
         List<Integer> grades = Arrays.stream(parts).skip(1).map(Integer::parseInt).collect(Collectors.toList());
-        return new Student(id, grades);
+        return new Studen(id, grades);
     }
 
     public double averageGrade() {
@@ -66,16 +66,15 @@ class RuleProcessor<E> {
     // да го примени секое правило од листата на правила и на екран да го
     // испечати резултатот од примената на правилото (доколку постои),
     // а во спротивно да испечати порака Condition not met.
-    public static <T, E> void process(List<T> inputData, List<Rule<T,E>> rules) {
-        Optional<E> result=null;
-        for (T element: inputData){
+    public static <T, E> void process(List<T> inputData, List<Rule<T, E>> rules) {
+        Optional<E> result = null;
+        for (T element : inputData) {
             System.out.println("Input: " + element);
-            for (Rule <T,E> rule : rules){
+            for (Rule<T, E> rule : rules) {
                 result = rule.apply(element);
             }
-
-            }
         }
+    }
 }
 
 public class RuleTester {
@@ -113,7 +112,7 @@ public class RuleTester {
 
 
         } else { //Test for Student, Double
-            List<Rule<Student, Double>> rules = new ArrayList<>();
+            List<Rule<Studen, Double>> rules = new ArrayList<>();
 
             //TODO Add a rule where if the student has at least 3 grades, the result would be the max grade of the student
             rules.add(new Rule<>(
@@ -132,9 +131,9 @@ public class RuleTester {
             ));
 
 
-            List<Student> students = new ArrayList<>();
+            List<Studen> students = new ArrayList<>();
             while (sc.hasNext()) {
-                students.add(Student.create(sc.nextLine()));
+                students.add(Studen.create(sc.nextLine()));
             }
 
             RuleProcessor.process(students, rules);

@@ -34,10 +34,6 @@ class Canvas implements Comparable<Canvas> {
         String[] parts = line.split("\\s+");
         this.canvas_id = parts[0];
 
-//        for (int i=1; i< parts.length; i++){
-//            this.squares.add(Integer.parseInt(parts[i]));
-//        }
-
         IntStream.range(1, parts.length)
                 .mapToObj(s -> Integer.parseInt(parts[s]))
                 .forEach(m -> this.squares.add(m));
@@ -57,12 +53,6 @@ class Canvas implements Comparable<Canvas> {
     }
 
     public int perimeter() {
-//        int sum=0;
-//        for (Integer size: squares){
-//            sum += size;
-//        }
-//
-//        return sum*4;
         return squares.stream()
                 .mapToInt(s -> s.intValue())
                 .sum() * 4;
@@ -90,11 +80,6 @@ class ShapesApplication {
                 .map(line -> new Canvas(line))
                 .collect(Collectors.toList());
 
-//        int count=0;
-//        for (Canvas canvas : canvases){
-//            count += canvas.squareCount();
-//        }
-
         int count2 = canvases.stream()
                 .mapToInt(canvas -> canvas.squareCount())
                 .sum();
@@ -110,23 +95,11 @@ class ShapesApplication {
                 .ifPresent(winner ->
                         pw.println(winner.getCanvas_id() + " " + winner.squareCount() + " " + winner.perimeter()));
 
-//        int max_perimeter = this.canvases.stream()
-//                .mapToInt(c -> c.perimeter())
-//                .max()
-//                .orElse(0);
-//
-//        Canvas winner = null;
-//        for (Canvas c : canvases){
-//            if(c.perimeter() == max_perimeter){
-//                winner = c;
-//            }
-//        }
-//
-//        pw.println(winner.getCanvas_id() + " " + winner.squareCount() + " " + winner.perimeter());
         pw.flush();
         pw.close();
 
     }
+
 }
 
 public class Shapes1Test {
